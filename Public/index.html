@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <script src="/Router/simple-router.js"></script>
+</head>
+
+<body>
+    Navigation:
+    <button onclick="changeUrl('/about')">about</button>
+    <button onclick="changeUrl('products/12/edit/22')">Product</button>
+    <button onclick="changeUrl('/')">Home</button>
+    <script>
+                     let route = new SimpleRouter(window.location);
+
+                     route
+                         .add(/about/, function () {
+                             console.log('about');
+                         })
+                         .add(/products\/(.*)\/edit\/(.*)/, function () {
+                             console.log('products', arguments);
+                         })
+                         .add(function () {
+                             console.log('default');
+                         })
+                         .listen();
+                         
+                     //  .check('/products/12/edit/22')
+                     //  .check('/about');
+                     route.navigate(location.pathname);
+                     let changeUrl = function (url) {
+                         route.navigate(url);
+                     }
+    </script>
+</body>
+
+</html>
