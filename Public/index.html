@@ -10,7 +10,13 @@
     <button onclick="changeUrl('products/12/edit/22')">Product</button>
     <button onclick="changeUrl('/')">Home</button>
     <script>
-                     let route = new SimpleRouter(window.location);
+                     window.addEventListener('popstate', function (e) {
+                         var state = e.state;
+                         if (state !== null) {
+                             console.log('e =>', e);
+                         }
+                     });
+                     let route = new SimpleRouter(window.location, window);
 
                      route
                          .add(/about/, function () {
@@ -23,7 +29,7 @@
                              console.log('default');
                          })
                          .listen();
-                         
+
                      //  .check('/products/12/edit/22')
                      //  .check('/about');
                      route.navigate(location.pathname);
